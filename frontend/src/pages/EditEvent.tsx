@@ -60,6 +60,7 @@ const EditEvent = () => {
     try {
       const submitData = new FormData()
       Object.entries(formData).forEach(([key, value]) => {
+        if (value === '') return; // Skip empty strings to prevent 400 Bad Request on optional fields like end_time
         submitData.append(key, String(value))
       })
       if (imageFile) submitData.append('image', imageFile)
