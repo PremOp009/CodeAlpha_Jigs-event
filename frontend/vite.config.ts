@@ -7,12 +7,12 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://jigs-event.onrender.com',
         changeOrigin: true,
         secure: false,
       },
       '/media': {
-        target: 'http://localhost:8000',
+        target: 'https://jigs-event.onrender.com',
         changeOrigin: true,
       },
     },

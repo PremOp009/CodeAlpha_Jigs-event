@@ -3,7 +3,7 @@
  */
 
 // ─── API Configuration ──────────────────────────────────────────────────────────
-export const DEFAULT_API_BASE_URL = 'http://10.75.113.56:8000/api/';
+export const DEFAULT_API_BASE_URL = 'https://jigs-event.onrender.com/api/';
 
 export const API_ENDPOINTS = {
   LOGIN: 'auth/login',
