@@ -235,7 +235,7 @@ const EventDetail = () => {
             </div>
           </section>
 
-          {event.highlights && event.highlights.length > 0 && (
+          {Array.isArray(event.highlights) && event.highlights.length > 0 && (
             <section className="glass-card p-8">
               <h2 className="text-2xl font-bold mb-4">Highlights</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
