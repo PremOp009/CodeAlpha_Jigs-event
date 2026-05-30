@@ -10,7 +10,12 @@
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "image": "latest"
+      },
+      "env": {
+        "EXPO_EAS_BUILD_COMPILER_MEM": "4g",
+        "NODE_OPTIONS": "--max-old-space-size=4096"
       }
     },
     "production": {}
