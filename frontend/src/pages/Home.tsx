@@ -264,11 +264,11 @@ const Home = () => {
           eventService.getTrending(),
           eventService.getFeatured(),
         ])
-        setTrending(trendRes.data.results || trendRes.data)
-        setFeatured(featRes.data.results || featRes.data)
+        setTrending(Array.isArray(trendRes.data.results) ? trendRes.data.results : (Array.isArray(trendRes.data) ? trendRes.data : []))
+        setFeatured(Array.isArray(featRes.data.results) ? featRes.data.results : (Array.isArray(featRes.data) ? featRes.data : []))
         if (isAuthenticated) {
           const recRes = await eventService.getRecommended()
-          setRecommended(recRes.data.results || recRes.data)
+          setRecommended(Array.isArray(recRes.data.results) ? recRes.data.results : (Array.isArray(recRes.data) ? recRes.data : []))
         }
       } catch (error) {
         console.error('Failed to load home data', error)

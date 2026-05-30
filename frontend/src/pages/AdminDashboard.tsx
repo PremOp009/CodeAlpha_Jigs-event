@@ -18,8 +18,8 @@ const AdminDashboard = () => {
           userService.getAdminUsers(),
           eventService.getAdminAll()
         ])
-        setUsers(usersRes.data.results || usersRes.data)
-        setEvents(eventsRes.data.results || eventsRes.data)
+        setUsers(Array.isArray(usersRes.data.results) ? usersRes.data.results : (Array.isArray(usersRes.data) ? usersRes.data : []))
+        setEvents(Array.isArray(eventsRes.data.results) ? eventsRes.data.results : (Array.isArray(eventsRes.data) ? eventsRes.data : []))
       } catch (error) {
         toast.error('Failed to load admin data')
       } finally {

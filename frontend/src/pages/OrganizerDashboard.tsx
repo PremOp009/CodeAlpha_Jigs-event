@@ -115,7 +115,7 @@ const OrganizerDashboard = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {stats.event_stats.length > 0 ? stats.event_stats.map((ev: any) => (
+              {stats.event_stats && Array.isArray(stats.event_stats) && stats.event_stats.length > 0 ? stats.event_stats.map((ev: any) => (
                 <tr key={ev.id} className="hover:bg-white/5 transition-colors">
                   <td className="p-4 font-medium">{ev.title}</td>
                   <td className="p-4 text-gray-400">{ev.date}</td>

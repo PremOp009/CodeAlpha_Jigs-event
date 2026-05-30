@@ -25,7 +25,7 @@ const Events = () => {
     setIsLoading(true)
     try {
       const { data } = await eventService.getAll(filters)
-      setEvents(data.results || data)
+      setEvents(Array.isArray(data.results) ? data.results : (Array.isArray(data) ? data : []))
     } catch (error) {
       toast.error('Failed to load events')
     } finally {

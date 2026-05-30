@@ -18,7 +18,7 @@ const MyRegistrations = () => {
   const fetchRegistrations = async () => {
     try {
       const { data } = await registrationService.getMyRegistrations()
-      setRegistrations(data.results || data)
+      setRegistrations(Array.isArray(data.results) ? data.results : (Array.isArray(data) ? data : []))
     } catch (error) {
       toast.error('Failed to load tickets')
     } finally {

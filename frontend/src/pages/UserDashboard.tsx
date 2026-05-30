@@ -15,7 +15,7 @@ const UserDashboard = () => {
     const fetchDashboardData = async () => {
       try {
         const { data } = await userService.getBookmarks()
-        setBookmarks(data.results || data)
+        setBookmarks(Array.isArray(data.results) ? data.results : (Array.isArray(data) ? data : []))
       } catch (error) {
         toast.error('Failed to load dashboard data')
       } finally {
