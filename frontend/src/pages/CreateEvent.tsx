@@ -92,9 +92,12 @@ const CreateEvent = () => {
         else {
           // DRF validation errors: {"field": ["Error message"]}
           const firstError = Object.values(data)[0]
-          if (Array.isArray(firstError)) toast.error(firstError[0])
+          if (Array.isArray(firstError)) toast.error(firstError[0] as string)
           else toast.error('Validation Error. Please check your inputs.')
-          console.error("Backend validation failed:", data)
+          
+          const errorStr = JSON.stringify(data, null, 2)
+          console.error("Backend validation failed:", errorStr)
+          alert(`BACKEND ERROR:\n${errorStr}\n\nPlease copy this exact message and send it to me!`)
         }
       } else {
         toast.error('Failed to create event')
