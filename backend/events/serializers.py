@@ -86,17 +86,6 @@ class EventCreateUpdateSerializer(serializers.ModelSerializer):
             'registration_deadline',
         ]
 
-    def to_internal_value(self, data):
-        # MultiPartParser sends JSON fields as strings. Parse them back.
-        if 'highlights' in data and isinstance(data['highlights'], str):
-            import json
-            try:
-                mutable_data = data.copy() if hasattr(data, 'copy') else data
-                mutable_data['highlights'] = json.loads(data['highlights'])
-                data = mutable_data
-            except Exception:
-                pass
-        return super().to_internal_value(data)
 
     def validate(self, attrs):
         if attrs.get('max_seats', 0) < 1:
