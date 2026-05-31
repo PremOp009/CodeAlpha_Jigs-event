@@ -24,7 +24,7 @@ api.interceptors.response.use(
       try {
         const refresh = localStorage.getItem('jigs_refresh')
         if (!refresh) throw new Error('No refresh token')
-        const { data } = await axios.post('/api/auth/token/refresh', { refresh })
+        const { data } = await axios.post(`${baseURL}/auth/token/refresh`, { refresh })
         localStorage.setItem('jigs_access', data.access)
         original.headers.Authorization = `Bearer ${data.access}`
         return api(original)
