@@ -77,7 +77,19 @@ const CreateEvent = () => {
       toast.success('Event created successfully!')
       navigate(`/events/${data.event.id}`)
     } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to create event')
+      const data = error.response?.data
+      if (data) {
+        if (data.error) toast.error(data.error)
+        else {
+          // DRF validation errors: {"field": ["Error message"]}
+          const firstError = Object.values(data)[0]
+          if (Array.isArray(firstError)) toast.error(firstError[0])
+          else toast.error('Validation Error. Please check your inputs.')
+          console.error("Backend validation failed:", data)
+        }
+      } else {
+        toast.error('Failed to create event')
+      }
     } finally {
       setIsLoading(false)
     }

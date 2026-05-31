@@ -2,9 +2,7 @@ import api from './api'
 
 export const userService = {
   getProfile: () => api.get('/auth/profile'),
-  updateProfile: (data: FormData) => api.patch('/auth/profile', data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  }),
+  updateProfile: (data: FormData) => api.patch('/auth/profile', data),
   changePassword: (data: any) => api.post('/auth/change-password', data),
   toggleBookmark: (eventId: number) => api.post(`/auth/bookmark/${eventId}`),
   getBookmarks: () => api.get('/auth/bookmarks'),

@@ -59,12 +59,8 @@ export const eventService = {
   getAnalytics: () => api.get('/events/analytics'),
   getAttendees: (id: number) => api.get(`/events/${id}/attendees`),
   getAdminAll: () => api.get('/events/admin/all'),
-  create: (data: FormData) => api.post('/events/create', data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  }),
-  update: (id: number, data: FormData) => api.patch(`/events/${id}/update/`, data, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  }),
+  create: (data: FormData) => api.post('/events/create', data),
+  update: (id: number, data: FormData) => api.patch(`/events/${id}/update/`, data),
   delete: (id: number) => api.delete(`/events/${id}/delete/`),
 }
 
