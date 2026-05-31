@@ -74,8 +74,10 @@ const CreateEvent = () => {
       })
       if (imageFile) {
         console.log('Uploading file:', imageFile.name, imageFile.type, imageFile.size)
-        // Browsers handle File objects natively without needing the third parameter.
-        submitData.append('image', imageFile)
+        // Convert to a raw Blob to guarantee FormData treats it as a file, avoiding any browser proxy/File object quirks
+        const arrayBuffer = await imageFile.arrayBuffer()
+        const safeBlob = new Blob([arrayBuffer], { type: imageFile.type })
+        submitData.append('image', safeBlob, imageFile.name)
       }
 
       console.log('FormData keys:', Array.from(submitData.keys()))
