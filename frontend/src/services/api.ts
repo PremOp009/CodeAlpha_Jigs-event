@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const baseURL = (import.meta.env.VITE_API_URL || '/api').trim()
+const isProd = import.meta.env.PROD;
+const baseURL = isProd 
+  ? 'https://jigs-event.onrender.com/api' 
+  : (import.meta.env.VITE_API_URL || '/api').trim()
 
 const api = axios.create({
   baseURL,

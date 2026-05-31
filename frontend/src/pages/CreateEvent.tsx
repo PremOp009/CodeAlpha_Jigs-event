@@ -64,6 +64,7 @@ const CreateEvent = () => {
     try {
       const submitData = new FormData()
       Object.entries(formData).forEach(([key, value]) => {
+        if (key === 'image') return; // Absolutely prevent stringified image
         if (value === '') return; // Skip empty strings to prevent 400 Bad Request on optional fields like end_time
         if (key === 'highlights') {
           submitData.append(key, JSON.stringify(value))
@@ -73,8 +74,11 @@ const CreateEvent = () => {
       })
       if (imageFile) {
         console.log('Uploading file:', imageFile.name, imageFile.type, imageFile.size)
-        submitData.append('image', imageFile, imageFile.name)
+        // Browsers handle File objects natively without needing the third parameter.
+        submitData.append('image', imageFile)
       }
+
+      console.log('FormData keys:', Array.from(submitData.keys()))
 
       const { data } = await eventService.create(submitData)
       toast.success('Event created successfully!')
