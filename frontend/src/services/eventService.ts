@@ -59,8 +59,32 @@ export const eventService = {
   getAnalytics: () => api.get('/events/analytics'),
   getAttendees: (id: number) => api.get(`/events/${id}/attendees`),
   getAdminAll: () => api.get('/events/admin/all'),
-  create: (data: FormData) => api.post('/events/create', data),
-  update: (id: number, data: FormData) => api.patch(`/events/${id}/update/`, data),
+  create: async (data: FormData) => {
+    const token = localStorage.getItem('jigs_access');
+    const res = await fetch(`${api.defaults.baseURL}/events/create`, {
+      method: 'POST',
+      headers: { ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
+      body: data
+    });
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw { response: { data: errorData } };
+    }
+    return { data: await res.json() };
+  },
+  update: async (id: number, data: FormData) => {
+    const token = localStorage.getItem('jigs_access');
+    const res = await fetch(`${api.defaults.baseURL}/events/${id}/update/`, {
+      method: 'PATCH',
+      headers: { ...(token ? { 'Authorization': `Bearer ${token}` } : {}) },
+      body: data
+    });
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw { response: { data: errorData } };
+    }
+    return { data: await res.json() };
+  },
   delete: (id: number) => api.delete(`/events/${id}/delete/`),
 }
 
