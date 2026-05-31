@@ -71,7 +71,10 @@ const CreateEvent = () => {
           submitData.append(key, String(value))
         }
       })
-      if (imageFile) submitData.append('image', imageFile)
+      if (imageFile) {
+        console.log('Uploading file:', imageFile.name, imageFile.type, imageFile.size)
+        submitData.append('image', imageFile, imageFile.name)
+      }
 
       const { data } = await eventService.create(submitData)
       toast.success('Event created successfully!')
